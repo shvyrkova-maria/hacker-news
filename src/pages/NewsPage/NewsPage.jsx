@@ -23,6 +23,7 @@ function NewsPage() {
             dispatch({ type: "NEWS_RESOLVED", payload: data })
           );
         }
+        window.scrollTo({ top: 0, behavior: "smooth" });
       } catch (err) {
         dispatch({ type: "REJECTED", payload: err });
       }
