@@ -51,7 +51,7 @@ function CommetsPage() {
         </ul>
       )}
       {state.status === Status.REJECTED && (
-        <div>{`${error}. Try again later.`}</div>
+        <div>{`${state.error}. Try again later.`}</div>
       )}
     </>
   );

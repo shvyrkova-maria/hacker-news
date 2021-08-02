@@ -79,6 +79,6 @@ export function newsReducer(state, { type, payload }) {
       };
 
     default:
-      state;
+      return state;
   }
 }
