@@ -1,53 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import InfiniteScroll from 'react-infinite-scroll-component';
-// import { useHistory } from 'react-router';
-import { getTimeComponents } from 'utils/getTimeComponents';
-import s from '../NewsTable/NewsTable.module.css';
+import React, { useEffect, useReducer } from "react";
+import { Link } from "react-router-dom";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { reducer } from "../../reduser/reducer";
+import { getTimeComponents } from "utils/getTimeComponents";
+import s from "../NewsTable/NewsTable.module.css";
 
-function NewsTable({ news, page, setPage }) {
-  const [sorted, setSorted] = useState(null);
-  const [isSorted, setIsSorted] = useState(false);
+function NewsTable({ news, page }) {
+  const [state, dispatch] = useReducer(reducer, {
+    news: news,
+    page: page,
+    error: "",
+    sorted: null,
+    isSorted: false,
+  });
 
   useEffect(() => {
-    // if (filter) return;
-    setSorted(news);
+    dispatch({ type: "TEST" });
   }, [news]);
-
-  const sortedNews = (arr, key) => {
-    switch (key) {
-      case 'time':
-        setIsSorted(!isSorted);
-        return setSorted(
-          [...arr].sort((a, b) =>
-            isSorted ? b.time - a.time : a.time - b.time,
-          ),
-        );
-
-      case 'title':
-        setIsSorted(!isSorted);
-        return setSorted(
-          [...arr].sort((a, b) =>
-            isSorted
-              ? a.title.localeCompare(b.title)
-              : b.title.localeCompare(a.title),
-          ),
-        );
-
-      case 'domain':
-        setIsSorted(!isSorted);
-        return setSorted(
-          [...arr].sort((a, b) =>
-            isSorted
-              ? a.domain?.localeCompare(b.domain)
-              : b.domain?.localeCompare(a.domain),
-          ),
-        );
-
-      default:
-        return;
-    }
-  };
 
   return (
     <>
@@ -56,7 +25,7 @@ function NewsTable({ news, page, setPage }) {
           <button
             type="button"
             className={s.tableSortBtn}
-            onClick={() => sortedNews(news, 'time')}
+            onClick={() => dispatch({ type: "SORT_TIME" })}
           >
             Time Sort
           </button>
@@ -65,7 +34,7 @@ function NewsTable({ news, page, setPage }) {
           <button
             type="button"
             className={s.tableSortBtn}
-            onClick={() => sortedNews(news, 'title')}
+            onClick={() => dispatch({ type: "SORT_TITLE" })}
           >
             Title Sort
           </button>
@@ -74,22 +43,22 @@ function NewsTable({ news, page, setPage }) {
           <button
             type="button"
             className={s.tableSortBtn}
-            onClick={() => sortedNews(news, 'domain')}
+            onClick={() => dispatch({ type: "SORT_DOMAIN" })}
           >
             Domain Sort
           </button>
         </div>
       </div>
       <ul>
-        {sorted && (
+        {state.sorted && (
           <InfiniteScroll
-            dataLength={sorted.length}
-            next={() => setPage(page + 1)}
+            dataLength={state.sorted.length}
+            next={() => dispatch({ type: "INCREMENT_PAGE", payload: 1 })}
             hasMore={true}
             pullDownToRefreshThreshold={300}
-            style={{ overflow: 'hidden' }}
+            style={{ overflow: "hidden" }}
           >
-            {sorted.map(({ id, title, time, domain }) => {
+            {state.sorted.map(({ id, title, time, domain }) => {
               return (
                 <li key={id}>
                   <Link to={{ pathname: `/news/${id}` }} className={s.tableRow}>
@@ -108,7 +77,7 @@ function NewsTable({ news, page, setPage }) {
       <button
         type="button"
         className={s.sortByTimeBtn}
-        onClick={() => sortedNews(news, 'time')}
+        onClick={() => dispatch({ type: "SORT_TIME" })}
       >
         Time Sort
       </button>
@@ -117,112 +86,3 @@ function NewsTable({ news, page, setPage }) {
 }
 
 export default NewsTable;
-
-// function NewsTable({ news, page, setPage }) {
-//   const [sorted, setSorted] = useState(null);
-//   const [isSorted, setIsSorted] = useState(false);
-
-//   useEffect(() => {
-//     // if (filter) return;
-//     setSorted(news);
-//   }, [news]);
-
-//   const sortedNews = (arr, key) => {
-//     switch (key) {
-//       case 'time':
-//         setIsSorted(!isSorted);
-//         return setSorted(
-//           [...arr].sort((a, b) =>
-//             isSorted ? b.time - a.time : a.time - b.time,
-//           ),
-//         );
-
-//       case 'title':
-//         setIsSorted(!isSorted);
-//         return setSorted(
-//           [...arr].sort((a, b) =>
-//             isSorted
-//               ? a.title.localeCompare(b.title)
-//               : b.title.localeCompare(a.title),
-//           ),
-//         );
-
-//       case 'domain':
-//         setIsSorted(!isSorted);
-//         return setSorted(
-//           [...arr].sort((a, b) =>
-//             isSorted
-//               ? a.domain?.localeCompare(b.domain)
-//               : b.domain?.localeCompare(a.domain),
-//           ),
-//         );
-
-//       default:
-//         return;
-//     }
-//   };
-
-//   return (
-//     <table>
-//       <thead className={s.tableHeadersWrap}>
-//         <tr>
-//           <th className={s.tableRowTime}>
-//             <button
-//               type="button"
-//               className={s.tableSortBtn}
-//               onClick={() => sortedNews(news, 'time')}
-//             >
-//               Time Sort
-//             </button>
-//           </th>
-//           <th className={s.tableRowTitle}>
-//             <button
-//               type="button"
-//               className={s.tableSortBtn}
-//               onClick={() => sortedNews(news, 'title')}
-//             >
-//               Title Sort
-//             </button>
-//           </th>
-//           <th className={s.tableRowDomain}>
-//             <button
-//               type="button"
-//               className={s.tableSortBtn}
-//               onClick={() => sortedNews(news, 'domain')}
-//             >
-//               Domain Sort
-//             </button>
-//           </th>
-//         </tr>
-//       </thead>
-
-//       <tbody>
-//         {sorted && (
-//           <InfiniteScroll
-//             dataLength={sorted.length}
-//             next={() => setPage(page + 1)}
-//             hasMore={true}
-//             pullDownToRefreshThreshold={300}
-//             style={{ overflow: 'hidden' }}
-//           >
-//             {sorted.map(({ id, title, time, domain }) => {
-//               return (
-//                 <tr key={id}>
-//                   <Link to={{ pathname: `/news/${id}` }} className={s.tableRow}>
-//                     <td className={s.tableRowTime}>
-//                       {getTimeComponents(time)}
-//                     </td>
-//                     <td className={s.tableRowTitle}>{title}</td>
-//                     <td className={s.tableRowDomain}>{domain}</td>
-//                   </Link>
-//                 </tr>
-//               );
-//             })}
-//           </InfiniteScroll>
-//         )}
-//       </tbody>
-//     </table>
-//   );
-// }
-
-// export default NewsTable;

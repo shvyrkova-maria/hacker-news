@@ -1,22 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router';
-import { fetchNewsComments } from 'services/hackerNewsApi';
-import { getTimeComponents } from 'utils/getTimeComponents';
+import React, { useEffect, useReducer } from "react";
+import { useParams } from "react-router";
+import { fetchNewsComments } from "services/hackerNewsApi";
+import { reducer } from "../../reduser/reducer";
+import { getTimeComponents } from "utils/getTimeComponents";
+
+const Status = {
+  IDLE: "idle",
+  PENDING: "pending",
+  RESOLVED: "resolved",
+  REJECTED: "rejected",
+};
+
+const initialState = {
+  comments: [],
+  isReadMore: true,
+  status: Status.IDLE,
+  error: "",
+};
 
 function CommetsPage() {
   const { newsId } = useParams();
-  const [comments, setComments] = useState([]);
-  // const [error, setError] = useState('');
-  const [isReadMore, setIsReadMore] = useState(true);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     function getComments() {
       try {
         fetchNewsComments(newsId).then(({ data }) =>
-          setComments(data.comments),
+          dispatch({ type: "COMMENTS_RESOLVED", payload: data.comments })
         );
       } catch (err) {
-        // setError(err.message);
+        dispatch({ type: "REJECTED", payload: err });
       }
     }
     getComments();
@@ -24,18 +37,20 @@ function CommetsPage() {
 
   return (
     <>
-      {comments.length === 0 ? (
+      {state.comments.length === 0 ? (
         <p>This news have not comments yet</p>
       ) : (
         <ul>
-          {comments.map(({ id, time, content }) => {
+          {state.comments.map(({ id, time, content }) => {
             return (
               <li key={id}>
                 <span>{getTimeComponents(time)}</span>
-                <span> {isReadMore ? content.slice(3, 200) : content}</span>
+                <span>
+                  {state.isReadMore ? content.slice(3, 200) : content}
+                </span>
                 {content.length > 200 && (
-                  <span onClick={() => setIsReadMore(!isReadMore)}>
-                    {isReadMore ? 'Read More >> ' : 'Read Less << '}
+                  <span onClick={() => dispatch({ type: "READ_MORE" })}>
+                    {state.isReadMore ? "Read More >> " : "Read Less << "}
                   </span>
                 )}
               </li>

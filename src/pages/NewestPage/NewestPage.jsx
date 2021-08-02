@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useLocation, useRouteMatch } from "react-router";
+import React, { useEffect, useReducer } from "react";
 import { fetchNewest } from "services/hackerNewsApi";
+import { reducer } from "../../reduser/reducer";
 import NewsTable from "components/NewsTable/NewsTable.jsx";
 
 const Status = {
@@ -10,56 +10,36 @@ const Status = {
   REJECTED: "rejected",
 };
 
+const initialState = {
+  news: [],
+  page: 1,
+  status: Status.IDLE,
+  error: "",
+};
+
 function NewestPage() {
-  const [news, setNews] = useState([]);
-  const [page, setPage] = useState(1);
-  const [status, setStatus] = useState(Status.IDLE);
-  const [error, setError] = useState("");
-  // const { url, path } = useRouteMatch();
-  // console.log(url, path);
-  // console.log(path === '/news');
-
-  // const currPage = Number(new URLSearchParams(location.search).get('page')) || 1;
-
-  // const location = useLocation();
-  // console.log(location);
-  // console.log(location.pathname === "/news");
-  // const currLoc = location.pathname === "/news";
-
-  // const [status, setStatus] = useState(status.IDLE);
-
-  // const page = new URLSearchParams(location.search).get('news');
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { news, page, status, error } = state;
 
   useEffect(() => {
-    setStatus(Status.PENDING);
+    dispatch({ type: "PENDING" });
     function getNews() {
       try {
-        // if (!currLoc) {
-        //   fetchNews(page).then(({ data }) =>
-        //     setNews((news) => [...news, ...data])
-        //   );
-        // }
-
         fetchNewest(page).then(({ data }) =>
-          setNews((news) => [...news, ...data])
+          dispatch({ type: "NEWS_RESOLVED", payload: data })
         );
-
-        setStatus(Status.RESOLVED);
       } catch (err) {
-        setError(err.message);
-        setStatus(Status.REJECTED);
+        dispatch({ type: "REJECTED", payload: err });
       }
     }
     getNews();
-  }, [page, location]);
+  }, [page]);
 
   return (
     <>
       {status === Status.IDLE && <></>}
       {status === Status.PENDING && <div>Loading...</div>}
-      {status === Status.RESOLVED && (
-        <NewsTable news={news} page={page} setPage={setPage} />
-      )}
+      {status === Status.RESOLVED && <NewsTable news={news} page={page} />}
       {status === Status.REJECTED && <div>{`${error}. Try again later.`}</div>}
     </>
   );

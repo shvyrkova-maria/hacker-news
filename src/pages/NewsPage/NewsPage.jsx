@@ -1,41 +1,48 @@
-import React, { useState, useEffect } from 'react';
-// import { useLocation } from 'react-router';
-import { fetchNews } from 'services/hackerNewsApi';
+import React, { useEffect, useReducer } from "react";
+import { fetchNews } from "services/hackerNewsApi";
+import { reducer } from "../../reduser/reducer";
+import NewsTable from "components/NewsTable/NewsTable.jsx";
 
-import NewsTable from 'components/NewsTable/NewsTable.jsx';
+const Status = {
+  IDLE: "idle",
+  PENDING: "pending",
+  RESOLVED: "resolved",
+  REJECTED: "rejected",
+};
 
-// const Status = {
-//   IDLE: 'idle',
-//   PENDING: 'pending',
-//   RESOLVED: 'resolved',
-//   REJECTED: 'rejected',
-// };
+const initialState = {
+  news: [],
+  page: 1,
+  status: Status.IDLE,
+  error: "",
+};
 
 function NewsPage() {
-  const [news, setNews] = useState([]);
-  const [page, setPage] = useState(1);
-  // const [error, setError] = useState('');
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { news, page, status, error } = state;
 
-  // const location = useLocation();
-  // console.log(location);
-  // const [status, setStatus] = useState(status.IDLE);
-
-  // const page = new URLSearchParams(location.pathname);
-  // console.log(page);
   useEffect(() => {
+    dispatch({ type: "PENDING" });
     function getNews() {
       try {
-        fetchNews(page).then(({ data }) => setNews(news => [...news, ...data]));
-        // setStatus(Status.RESOLVED);
+        fetchNews(page).then(({ data }) =>
+          dispatch({ type: "NEWS_RESOLVED", payload: data })
+        );
       } catch (err) {
-        // setError(err.message);
-        // setStatus(Status.REJECTED);
+        dispatch({ type: "REJECTED", payload: err });
       }
     }
     getNews();
   }, [page]);
 
-  return <NewsTable news={news} page={page} setPage={setPage} />;
+  return (
+    <>
+      {status === Status.IDLE && <></>}
+      {status === Status.PENDING && <div>Loading...</div>}
+      {status === Status.RESOLVED && <NewsTable news={news} page={page} />}
+      {status === Status.REJECTED && <div>{`${error}. Try again later.`}</div>}
+    </>
+  );
 }
 
 export default NewsPage;
