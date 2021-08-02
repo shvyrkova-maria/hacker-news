@@ -1,18 +1,12 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useContext } from "react";
+import { NewsContext } from "../../state";
 import { Link } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { reducer } from "../../reduser/reducer";
 import { getTimeComponents } from "utils/getTimeComponents";
 import s from "../NewsTable/NewsTable.module.css";
 
-function NewsTable({ news, page }) {
-  const [state, dispatch] = useReducer(reducer, {
-    news: news,
-    page: page,
-    isSorted: false,
-  });
-
-  console.log(state);
+function NewsTable() {
+  const { state, dispatch } = useContext(NewsContext);
 
   return (
     <>

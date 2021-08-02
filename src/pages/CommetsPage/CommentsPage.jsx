@@ -1,20 +1,13 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useContext } from "react";
+import { NewsContext } from "../../state";
 import { useParams } from "react-router";
 import { fetchNewsComments } from "services/hackerNewsApi";
-import { reducer } from "../../reduser/reducer";
 import { Status } from "../../constants/requestStatus";
 import { getTimeComponents } from "utils/getTimeComponents";
 
-const initialState = {
-  comments: [],
-  isReadMore: true,
-  status: Status.IDLE,
-  error: "",
-};
-
 function CommetsPage() {
   const { newsId } = useParams();
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const { state, dispatch } = useContext(NewsContext);
 
   useEffect(() => {
     function getComments() {

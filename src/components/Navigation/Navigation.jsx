@@ -1,8 +1,10 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import s from '../Navigation/Navigation.module.css';
+import React, { useContext } from "react";
+import { NewsContext } from "../../state";
+import { NavLink } from "react-router-dom";
+import s from "../Navigation/Navigation.module.css";
 
 function Navigation() {
+  const { dispatch } = useContext(NewsContext);
   return (
     <ul className={s.nav}>
       <li>
@@ -10,6 +12,7 @@ function Navigation() {
           to="/"
           className={s.navItem}
           activeClassName={s.navItemActive}
+          onClick={() => dispatch({ type: "RESET_NEWS" })}
           exact
         >
           Newest
@@ -20,6 +23,7 @@ function Navigation() {
           to="/news"
           className={s.navItem}
           activeClassName={s.navItemActive}
+          onClick={() => dispatch({ type: "RESET_NEWS" })}
         >
           News
         </NavLink>

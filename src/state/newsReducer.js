@@ -1,17 +1,16 @@
 import { Status } from "constants/requestStatus";
 
-// export const initialState = {
-//   news: [],
-//   comments: [],
-//   page: 1,
-//   status: Status.IDLE,
-//   error: "",
-//   sorted: null,
-//   isSorted: false,
-//   isReadMore: true,
-// };
+export const initialState = {
+  news: [],
+  comments: [],
+  page: 1,
+  status: Status.IDLE,
+  error: "",
+  isSorted: false,
+  isReadMore: true,
+};
 
-function reducer(state, { type, payload }) {
+export function newsReducer(state, { type, payload }) {
   switch (type) {
     case "PENDING":
       return { ...state, status: Status.PENDING };
@@ -32,6 +31,9 @@ function reducer(state, { type, payload }) {
 
     case "REJECTED":
       return { ...state, status: Status.REJECTED, error: payload };
+
+    case "RESET_NEWS":
+      return { ...state, news: [] };
 
     case "INCREMENT_PAGE":
       return {
@@ -80,5 +82,3 @@ function reducer(state, { type, payload }) {
       state;
   }
 }
-
-export { reducer };

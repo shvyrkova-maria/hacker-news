@@ -1,19 +1,11 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useContext } from "react";
+import { NewsContext } from "../../state";
 import { fetchNewest } from "services/hackerNewsApi";
-import { reducer } from "../../reduser/reducer";
 import { Status } from "../../constants/requestStatus";
 import NewsTable from "components/NewsTable/NewsTable.jsx";
 
-const initialState = {
-  news: [],
-  page: 1,
-  status: Status.IDLE,
-  error: "",
-};
-
 function NewestPage() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  // const { news, page, status, error } = state;
+  const { state, dispatch } = useContext(NewsContext);
 
   useEffect(() => {
     dispatch({ type: "PENDING" });
