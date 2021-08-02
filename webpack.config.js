@@ -2,13 +2,14 @@ const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  // entry: "index.js",
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "bundle.js",
   },
   devServer: {
     historyApiFallback: true,
+    port: 8081,
+    open: true,
   },
   resolve: {
     modules: [path.join(__dirname, "src"), "node_modules"],

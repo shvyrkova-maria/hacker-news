@@ -4,7 +4,9 @@
   "description": "hacker-news-app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve --mode=development --open --hot",
+    "build": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
@@ -18,8 +20,11 @@
   },
   "homepage": "https://github.com/shvyrkova-maria/hacker-news#readme",
   "dependencies": {
+    "axios": "^0.21.1",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
