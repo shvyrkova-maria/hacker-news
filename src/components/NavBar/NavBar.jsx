@@ -1,6 +1,6 @@
-import React from 'react';
-import Navigation from 'components/Navigation/Navigation.jsx';
-import s from '../NavBar/NavBar.module.css';
+import React from "react";
+import Navigation from "components/Navigation/Navigation.jsx";
+import s from "components/NavBar/NavBar.module.css";
 
 function NavBar() {
   return (

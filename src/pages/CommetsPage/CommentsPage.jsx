@@ -1,8 +1,8 @@
 import React, { useEffect, useContext } from "react";
-import { NewsContext } from "../../state";
+import { NewsContext } from "state";
 import { useParams } from "react-router";
 import { fetchNewsComments } from "services/hackerNewsApi";
-import { Status } from "../../constants/requestStatus";
+import { Status } from "constants/requestStatus";
 import { getTimeComponents } from "utils/getTimeComponents";
 
 function CommetsPage() {

@@ -32,8 +32,8 @@ export function newsReducer(state, { type, payload }) {
     case "REJECTED":
       return { ...state, status: Status.REJECTED, error: payload };
 
-    case "RESET_NEWS":
-      return { ...state, news: [] };
+    case "RESET":
+      return { ...state, news: [], comments: [] };
 
     case "INCREMENT_PAGE":
       return {

@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
-import { NewsContext } from "../../state";
+import { NewsContext } from "state";
 import { fetchNews } from "services/hackerNewsApi";
-import { Status } from "../../constants/requestStatus";
+import { Status } from "constants/requestStatus";
 import NewsTable from "components/NewsTable/NewsTable.jsx";
 
 function NewsPage() {

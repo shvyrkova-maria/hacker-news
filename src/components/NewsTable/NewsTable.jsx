@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { NewsContext } from "../../state";
+import { NewsContext } from "state";
 import { Link } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getTimeComponents } from "utils/getTimeComponents";
-import s from "../NewsTable/NewsTable.module.css";
+import s from "components/NewsTable/NewsTable.module.css";
 
 function NewsTable() {
   const { state, dispatch } = useContext(NewsContext);

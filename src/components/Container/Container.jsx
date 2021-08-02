@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import s from '../Container/Container.module.css';
+import React from "react";
+import PropTypes from "prop-types";
+import s from "components/Container/Container.module.css";
 
 function Container({ children }) {
   return <div className={s.container}>{children}</div>;

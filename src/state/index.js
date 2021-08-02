@@ -1,3 +1,2 @@
-export { NewsContext } from "./newsContext";
-export { newsReducer } from "./newsReducer";
-export { initialState } from "./newsReducer";
+export { NewsContext } from "state/newsContext";
+export { newsReducer, initialState } from "state/newsReducer";

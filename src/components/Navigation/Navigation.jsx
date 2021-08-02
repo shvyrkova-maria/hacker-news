@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { NewsContext } from "../../state";
+import { NewsContext } from "state";
 import { NavLink } from "react-router-dom";
-import s from "../Navigation/Navigation.module.css";
+import s from "components/Navigation/Navigation.module.css";
 
 function Navigation() {
   const { dispatch } = useContext(NewsContext);
@@ -12,7 +12,7 @@ function Navigation() {
           to="/"
           className={s.navItem}
           activeClassName={s.navItemActive}
-          onClick={() => dispatch({ type: "RESET_NEWS" })}
+          onClick={() => dispatch({ type: "RESET" })}
           exact
         >
           Newest
@@ -23,7 +23,7 @@ function Navigation() {
           to="/news"
           className={s.navItem}
           activeClassName={s.navItemActive}
-          onClick={() => dispatch({ type: "RESET_NEWS" })}
+          onClick={() => dispatch({ type: "RESET" })}
         >
           News
         </NavLink>
