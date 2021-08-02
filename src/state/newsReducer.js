@@ -33,7 +33,7 @@ export function newsReducer(state, { type, payload }) {
       return { ...state, status: Status.REJECTED, error: payload };
 
     case "RESET":
-      return { ...state, news: [], comments: [] };
+      return { ...state, news: [], comments: [], page: 1 };
 
     case "INCREMENT_PAGE":
       return {
