@@ -1,0 +1,144 @@
+.tableHeadersWrap,
+.tableRowTime,
+.tableRowDomain {
+  display: none;
+}
+
+.tableRow > span {
+  padding: 10px;
+  border: 1px solid lightgray;
+}
+
+.tableRowTitle {
+  display: block;
+}
+
+.sortByTimeBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: grey;
+  border: transparent;
+}
+
+.sortByTimeBtn:hover,
+.sortByTimeBtn:focus {
+  color: red;
+}
+
+@media screen and (min-width: 768px) {
+  .tableHeadersWrap {
+    display: flex;
+  }
+
+  .tableHeadersWrap > div {
+    padding: 10px;
+    border: 1px solid lightgray;
+  }
+
+  .tableRow {
+    display: flex;
+    /* width: 100%; */
+  }
+
+  .tableRowTime {
+    display: flex;
+    align-items: center;
+    min-width: 100px;
+    justify-content: center;
+  }
+
+  .tableRowTitle {
+    display: flex;
+    width: 100%;
+  }
+
+  .tableRowDomain {
+    display: flex;
+    width: 100%;
+  }
+
+  .tableSortBtn {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 4px 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .tableSortBtn:hover,
+  .tableSortBtn:focus {
+    color: red;
+  }
+
+  .sortByTimeBtn {
+    display: none;
+  }
+}
+
+/* .tableHeadersWrap,
+.tableRowTime,
+.tableRowDomain {
+  display: none;
+}
+
+.tableRow > td {
+  padding: 10px;
+  border: 1px solid lightgray;
+}
+
+.tableRowTitle {
+  display: block;
+} */
+
+/* @media screen and (min-width: 768px) {
+  .tableHeadersWrap {
+    display: flex;
+  }
+
+  .tableHeadersWrap {
+    border: 1px solid lightgray;
+    padding: 10px;
+  }
+
+  .tableRow {
+    display: flex;
+  }
+
+  .tableRowTime {
+    display: flex;
+    min-width: 120px;
+    justify-content: center;
+  }
+
+  .tableRowTitle {
+    display: block;
+  }
+
+  .tableRowDomain {
+    display: block;
+
+    width: 100%;
+    text-align: left;
+  }
+
+  .tableSortBtn {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 4px 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .tableSortBtn:hover,
+  .tableSortBtn:focus {
+    color: red;
+  }
+} */

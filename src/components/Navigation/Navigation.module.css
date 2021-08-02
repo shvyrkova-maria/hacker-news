@@ -1,0 +1,19 @@
+.nav {
+  display: flex;
+  align-items: center;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.nav > li {
+  margin-right: 10px;
+}
+
+.navItem {
+  text-transform: uppercase;
+}
+
+.navItemActive {
+  text-transform: uppercase;
+  color: red;
+}
