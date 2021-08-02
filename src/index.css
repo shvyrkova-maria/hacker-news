@@ -1,18 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;0,900;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;0,900;1,400&display=swap");
 
-/* :root {
-  --main-color: #1f1b2e;
-  --main-color-light: rgba(30, 26, 45, 0.7);
-  --main-shadow: 0px 1px 12px 4px rgba(31, 27, 46, 0.7);
-  --base-color: rgb(211, 211, 211);
-  --accent-color: rgb(234, 0, 66);
-  --accent-shadow: 0px 1px 12px 4px rgba(234, 0, 66, 0.7);
-} */
+:root {
+  --main-color: #7195ae;
+  --accent-color: #5d5c61;
+  --base-color: #d3d3d3;
+}
 
 body {
   margin: 0;
   color: black;
-  font-family: 'Poppins', Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: "Poppins", Roboto, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 18px;
 }
 

@@ -17,7 +17,7 @@ function NewsTable() {
             className={s.tableSortBtn}
             onClick={() => dispatch({ type: "SORT_TIME" })}
           >
-            Time Sort
+            Time
           </button>
         </div>
         <div className={s.tableRowTitle}>
@@ -26,7 +26,7 @@ function NewsTable() {
             className={s.tableSortBtn}
             onClick={() => dispatch({ type: "SORT_TITLE" })}
           >
-            Title Sort
+            Title
           </button>
         </div>
         <div className={s.tableRowDomain}>
@@ -35,7 +35,7 @@ function NewsTable() {
             className={s.tableSortBtn}
             onClick={() => dispatch({ type: "SORT_DOMAIN" })}
           >
-            Domain Sort
+            Domain
           </button>
         </div>
       </div>
@@ -52,11 +52,9 @@ function NewsTable() {
               return (
                 <li key={id}>
                   <Link to={{ pathname: `/news/${id}` }} className={s.tableRow}>
-                    <span className={s.tableRowTime}>
-                      {getTimeComponents(time)}
-                    </span>
-                    <span className={s.tableRowTitle}>{title}</span>
-                    <span className={s.tableRowDomain}>{domain}</span>
+                    <p className={s.tableRowTime}>{getTimeComponents(time)}</p>
+                    <h2 className={s.tableRowTitle}>{title}</h2>
+                    <p className={s.tableRowDomain}>{domain}</p>
                   </Link>
                 </li>
               );
@@ -69,7 +67,7 @@ function NewsTable() {
         className={s.sortByTimeBtn}
         onClick={() => dispatch({ type: "SORT_TIME" })}
       >
-        Time Sort
+        Sort
       </button>
     </>
   );

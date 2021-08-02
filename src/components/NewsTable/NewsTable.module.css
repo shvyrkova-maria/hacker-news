@@ -4,9 +4,11 @@
   display: none;
 }
 
-.tableRow > span {
+.tableRow > p,
+.tableRow > h2 {
+  font-size: 12px;
   padding: 10px;
-  border: 1px solid lightgray;
+  border: 1px solid var(--base-color);
 }
 
 .tableRowTitle {
@@ -20,28 +22,31 @@
   display: flex;
   align-items: center;
   padding: 10px;
-  background-color: grey;
+  font-size: 14px;
+  background-color: var(--main-color);
+  color: white;
   border: transparent;
+  border-radius: 20px;
+  transform: scale(1);
 }
 
-.sortByTimeBtn:hover,
-.sortByTimeBtn:focus {
-  color: red;
+.sortByTimeBtn:hover {
+  transform: scale(1.05);
 }
 
 @media screen and (min-width: 768px) {
   .tableHeadersWrap {
     display: flex;
+    background-color: var(--main-color);
   }
 
   .tableHeadersWrap > div {
     padding: 10px;
-    border: 1px solid lightgray;
+    border: 1px solid var(--base-color);
   }
 
   .tableRow {
     display: flex;
-    /* width: 100%; */
   }
 
   .tableRowTime {
@@ -52,7 +57,6 @@
   }
 
   .tableRowTitle {
-    display: flex;
     width: 100%;
   }
 
@@ -65,7 +69,6 @@
     display: inline-block;
     font-size: 14px;
     font-weight: 700;
-    padding: 4px 8px;
     background: none;
     border: none;
     cursor: pointer;
@@ -73,7 +76,7 @@
 
   .tableSortBtn:hover,
   .tableSortBtn:focus {
-    color: red;
+    color: white;
   }
 
   .sortByTimeBtn {

@@ -1,0 +1,26 @@
+.tableRow {
+  display: flex;
+  width: 100%;
+}
+
+.tableRow > p {
+  font-size: 12px;
+  padding: 10px;
+  border: 1px solid var(--base-color);
+}
+
+.tableRow > p > span {
+  font-size: 10px;
+  color: var(--accent-color);
+}
+
+.tableRowTime {
+  display: flex;
+  align-items: center;
+  min-width: 100px;
+  justify-content: center;
+}
+
+.tableRowComment {
+  width: 100%;
+}

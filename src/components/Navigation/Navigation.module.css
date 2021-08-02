@@ -1,8 +1,10 @@
 .nav {
   display: flex;
   align-items: center;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .nav > li {
@@ -10,10 +12,16 @@
 }
 
 .navItem {
-  text-transform: uppercase;
+  color: var(--base-color);
 }
 
 .navItemActive {
-  text-transform: uppercase;
-  color: red;
+  color: var(--main-color);
+}
+
+@media screen and (min-width: 768px) {
+  .nav {
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
 }
