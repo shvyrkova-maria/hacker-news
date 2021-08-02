@@ -2,14 +2,8 @@ import React, { useEffect, useReducer } from "react";
 import { useParams } from "react-router";
 import { fetchNewsComments } from "services/hackerNewsApi";
 import { reducer } from "../../reduser/reducer";
+import { Status } from "../../constants/requestStatus";
 import { getTimeComponents } from "utils/getTimeComponents";
-
-const Status = {
-  IDLE: "idle",
-  PENDING: "pending",
-  RESOLVED: "resolved",
-  REJECTED: "rejected",
-};
 
 const initialState = {
   comments: [],
@@ -37,9 +31,12 @@ function CommetsPage() {
 
   return (
     <>
-      {state.comments.length === 0 ? (
+      {state.status === Status.IDLE && <></>}
+      {state.status === Status.PENDING && <div>Loading...</div>}
+      {state.status === Status.RESOLVED && state.comments.length === 0 && (
         <p>This news have not comments yet</p>
-      ) : (
+      )}
+      {state.status === Status.RESOLVED && (
         <ul>
           {state.comments.map(({ id, time, content }) => {
             return (
@@ -57,6 +54,9 @@ function CommetsPage() {
             );
           })}
         </ul>
+      )}
+      {state.status === Status.REJECTED && (
+        <div>{`${error}. Try again later.`}</div>
       )}
     </>
   );

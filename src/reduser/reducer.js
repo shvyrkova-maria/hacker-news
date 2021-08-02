@@ -1,17 +1,14 @@
-const Status = {
-  IDLE: "idle",
-  PENDING: "pending",
-  RESOLVED: "resolved",
-  REJECTED: "rejected",
-};
+import { Status } from "constants/requestStatus";
 
-// const initialState = {
+// export const initialState = {
 //   news: [],
+//   comments: [],
 //   page: 1,
 //   status: Status.IDLE,
 //   error: "",
 //   sorted: null,
 //   isSorted: false,
+//   isReadMore: true,
 // };
 
 function reducer(state, { type, payload }) {
@@ -36,23 +33,17 @@ function reducer(state, { type, payload }) {
     case "REJECTED":
       return { ...state, status: Status.REJECTED, error: payload };
 
-    case "TEST":
-      return {
-        ...state,
-        sorted: [...state.news],
-      };
-
     case "INCREMENT_PAGE":
       return {
         ...state,
-        page: (state.page = state.page + payload),
+        page: state.page + 1,
       };
 
     case "SORT_TIME":
       return {
         ...state,
         isSorted: !state.isSorted,
-        sorted: [...state.news].sort((a, b) =>
+        news: [...state.news].sort((a, b) =>
           state.isSorted ? b.time - a.time : a.time - b.time
         ),
       };
@@ -61,7 +52,7 @@ function reducer(state, { type, payload }) {
       return {
         ...state,
         isSorted: !state.isSorted,
-        sorted: [...state.news].sort((a, b) =>
+        news: [...state.news].sort((a, b) =>
           state.isSorted
             ? a.title.localeCompare(b.title)
             : b.title.localeCompare(a.title)
@@ -72,7 +63,7 @@ function reducer(state, { type, payload }) {
       return {
         ...state,
         isSorted: !state.isSorted,
-        sorted: [...state.news].sort((a, b) =>
+        news: [...state.news].sort((a, b) =>
           state.isSorted
             ? a.domain?.localeCompare(b.domain)
             : b.domain?.localeCompare(a.domain)

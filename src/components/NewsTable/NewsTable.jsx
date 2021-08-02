@@ -9,14 +9,10 @@ function NewsTable({ news, page }) {
   const [state, dispatch] = useReducer(reducer, {
     news: news,
     page: page,
-    error: "",
-    sorted: null,
     isSorted: false,
   });
 
-  useEffect(() => {
-    dispatch({ type: "TEST" });
-  }, [news]);
+  console.log(state);
 
   return (
     <>
@@ -50,15 +46,15 @@ function NewsTable({ news, page }) {
         </div>
       </div>
       <ul>
-        {state.sorted && (
+        {state.news.length > 0 && (
           <InfiniteScroll
-            dataLength={state.sorted.length}
-            next={() => dispatch({ type: "INCREMENT_PAGE", payload: 1 })}
+            dataLength={state.news.length}
+            next={() => dispatch({ type: "INCREMENT_PAGE" })}
             hasMore={true}
             pullDownToRefreshThreshold={300}
             style={{ overflow: "hidden" }}
           >
-            {state.sorted.map(({ id, title, time, domain }) => {
+            {state.news.map(({ id, title, time, domain }) => {
               return (
                 <li key={id}>
                   <Link to={{ pathname: `/news/${id}` }} className={s.tableRow}>
