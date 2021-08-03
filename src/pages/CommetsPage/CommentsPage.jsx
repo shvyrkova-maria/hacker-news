@@ -38,7 +38,11 @@ function CommetsPage() {
                 <p className={s.tableRowTime}>{getTimeComponents(time)}</p>
                 <p className={s.tableRowComment}>
                   {content.length > 200 && (
-                    <span onClick={() => dispatch({ type: "READ_MORE" })}>
+                    <span
+                      onClick={() =>
+                        dispatch({ type: "READ_MORE", payload: id })
+                      }
+                    >
                       {state.isReadMore
                         ? `${content.slice(3, 170)} read more >> `
                         : `${content} read less << `}

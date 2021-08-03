@@ -35,9 +35,7 @@ function NewsPage() {
     <>
       {state.status === Status.IDLE && <></>}
       {state.status === Status.PENDING && <div>Loading...</div>}
-      {state.status === Status.RESOLVED && (
-        <NewsTable news={state.news} page={state.page} />
-      )}
+      {state.status === Status.RESOLVED && <NewsTable />}
       {state.status === Status.REJECTED && (
         <div>{`${state.error}. Try again later.`}</div>
       )}
