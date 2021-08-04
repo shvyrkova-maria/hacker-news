@@ -3,22 +3,21 @@
   width: 100%;
 }
 
-.tableRow > p {
-  overflow: hidden;
-  font-size: 12px;
-  padding: 10px;
-  border: 1px solid var(--base-color);
-}
-
 .tableRowTime {
   display: flex;
   align-items: center;
   min-width: 100px;
   justify-content: center;
+  font-size: 12px;
+  padding: 10px;
+  border: 1px solid var(--base-color);
 }
 
 .tableRowComment {
   width: 100%;
+  padding: 10px;
+  font-size: 12px;
+  border: 1px solid var(--base-color);
 }
 
 .tableRowComment > p:not(:first-child) {

@@ -36,10 +36,10 @@ function CommetsPage() {
             return (
               <li key={id} className={s.tableRow}>
                 <p className={s.tableRowTime}>{getTimeComponents(time)}</p>
-                <p
+                <div
                   className={s.tableRowComment}
                   dangerouslySetInnerHTML={{ __html: content }}
-                ></p>
+                ></div>
               </li>
             );
           })}
