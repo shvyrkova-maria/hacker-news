@@ -9,12 +9,6 @@
   border: 1px solid var(--base-color);
 }
 
-.tableRow > p > span {
-  font-size: 10px;
-  color: var(--accent-color);
-  /* text-overflow: ellipsis; */
-}
-
 .tableRowTime {
   display: flex;
   align-items: center;

@@ -7,7 +7,6 @@ export const initialState = {
   status: Status.IDLE,
   error: "",
   isSorted: false,
-  isReadMore: true,
 };
 
 export function newsReducer(state, { type, payload }) {
@@ -70,12 +69,6 @@ export function newsReducer(state, { type, payload }) {
             ? a.domain?.localeCompare(b.domain)
             : b.domain?.localeCompare(a.domain)
         ),
-      };
-
-    case "READ_MORE":
-      return {
-        ...state,
-        isReadMore: !state.isReadMore,
       };
 
     default:
