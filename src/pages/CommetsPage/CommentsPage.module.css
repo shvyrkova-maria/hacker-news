@@ -20,10 +20,6 @@
   border: 1px solid var(--base-color);
 }
 
-.tableRowComment > p:not(:first-child) {
-  display: none;
-}
-
 .viewMore {
   color: blue;
   cursor: pointer;
