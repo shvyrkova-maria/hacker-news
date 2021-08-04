@@ -4,6 +4,7 @@
 }
 
 .tableRow > p {
+  overflow: hidden;
   font-size: 12px;
   padding: 10px;
   border: 1px solid var(--base-color);
@@ -18,4 +19,13 @@
 
 .tableRowComment {
   width: 100%;
+}
+
+.tableRowComment > p:not(:first-child) {
+  display: none;
+}
+
+.viewMore {
+  color: blue;
+  cursor: pointer;
 }
