@@ -46,6 +46,7 @@ function NewsTable() {
             next={() => dispatch({ type: "INCREMENT_PAGE" })}
             hasMore={true}
             pullDownToRefreshThreshold={300}
+            loader={<h4>Loading...</h4>}
             style={{ overflow: "hidden" }}
           >
             {state.news.map(({ id, title, time, domain }) => {

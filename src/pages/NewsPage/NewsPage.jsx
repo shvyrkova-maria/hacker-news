@@ -10,7 +10,6 @@ function NewsPage() {
   const { state, dispatch } = useContext(NewsContext);
 
   useEffect(() => {
-    dispatch({ type: "PENDING" });
     function getNews() {
       try {
         if (url === "/") {
@@ -23,7 +22,6 @@ function NewsPage() {
             dispatch({ type: "NEWS_RESOLVED", payload: data })
           );
         }
-        window.scrollTo({ top: 0, behavior: "smooth" });
       } catch (err) {
         dispatch({ type: "REJECTED", payload: err });
       }
@@ -34,7 +32,6 @@ function NewsPage() {
   return (
     <>
       {state.status === Status.IDLE && <></>}
-      {state.status === Status.PENDING && <div>Loading...</div>}
       {state.status === Status.RESOLVED && <NewsTable />}
       {state.status === Status.REJECTED && (
         <div>{`${state.error}. Try again later.`}</div>

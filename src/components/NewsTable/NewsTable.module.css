@@ -63,6 +63,7 @@
   .tableRowDomain {
     display: flex;
     width: 100%;
+    /* text-overflow: ellipsis; */
   }
 
   .tableSortBtn {
