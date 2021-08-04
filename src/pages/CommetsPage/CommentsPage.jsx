@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useRef } from "react";
 import { NewsContext } from "state";
 import { useParams } from "react-router";
 import { fetchNewsComments } from "services/hackerNewsApi";
@@ -8,6 +8,7 @@ import s from "pages/CommetsPage/CommentsPage.module.css";
 
 function CommetsPage() {
   const { newsId } = useParams();
+  let commentEl = useRef(null);
   const { state, dispatch } = useContext(NewsContext);
 
   useEffect(() => {
@@ -23,6 +24,11 @@ function CommetsPage() {
     getComments();
   }, [newsId]);
 
+  function commentParse(el, comment) {
+    commentEl.current = el;
+    el.innerHTML = comment.concat("</p>");
+  }
+
   return (
     <>
       {state.status === Status.IDLE && <></>}
@@ -36,7 +42,10 @@ function CommetsPage() {
             return (
               <li key={id} className={s.tableRow}>
                 <p className={s.tableRowTime}>{getTimeComponents(time)}</p>
-                <p className={s.tableRowComment}>{content}</p>
+                <p
+                  className={s.tableRowComment}
+                  ref={(el) => commentParse(el, content)}
+                ></p>
               </li>
             );
           })}
