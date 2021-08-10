@@ -8,6 +8,22 @@ import s from "components/NewsTable/NewsTable.module.css";
 function NewsTable() {
   const { state, dispatch } = useContext(NewsContext);
 
+  const handleSortOnClick = (e) => {
+    if (e.target.name === "time") {
+      dispatch({ type: "SORT_TIME" });
+    }
+    if (e.target.name === "title") {
+      dispatch({ type: "SORT_TITLE" });
+    }
+    if (e.target.name === "domain") {
+      dispatch({ type: "SORT_DOMAIN" });
+    }
+  };
+
+  const handleIncPageOnScroll = () => {
+    dispatch({ type: "INCREMENT_PAGE" });
+  };
+
   return (
     <>
       <div className={s.tableHeadersWrap}>
@@ -15,7 +31,8 @@ function NewsTable() {
           <button
             type="button"
             className={s.tableSortBtn}
-            onClick={() => dispatch({ type: "SORT_TIME" })}
+            onClick={handleSortOnClick}
+            name="time"
           >
             Time
           </button>
@@ -24,7 +41,8 @@ function NewsTable() {
           <button
             type="button"
             className={s.tableSortBtn}
-            onClick={() => dispatch({ type: "SORT_TITLE" })}
+            onClick={handleSortOnClick}
+            name="title"
           >
             Title
           </button>
@@ -33,7 +51,8 @@ function NewsTable() {
           <button
             type="button"
             className={s.tableSortBtn}
-            onClick={() => dispatch({ type: "SORT_DOMAIN" })}
+            onClick={handleSortOnClick}
+            name="domain"
           >
             Domain
           </button>
@@ -43,7 +62,7 @@ function NewsTable() {
         {state.news.length > 0 && (
           <InfiniteScroll
             dataLength={state.news.length}
-            next={() => dispatch({ type: "INCREMENT_PAGE" })}
+            next={handleIncPageOnScroll}
             hasMore={true}
             loader={<h4>Loading...</h4>}
             endMessage={
@@ -73,7 +92,8 @@ function NewsTable() {
       <button
         type="button"
         className={s.sortByTimeBtn}
-        onClick={() => dispatch({ type: "SORT_TIME" })}
+        onClick={handleSortOnClick}
+        name="time"
       >
         Sort
       </button>
