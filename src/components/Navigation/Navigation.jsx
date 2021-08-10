@@ -5,6 +5,8 @@ import s from "components/Navigation/Navigation.module.css";
 
 function Navigation() {
   const { dispatch } = useContext(NewsContext);
+  const handleOnNavClick = () => dispatch({ type: "RESET" });
+
   return (
     <header className={s.navigationWrap}>
       <ul className={s.nav}>
@@ -13,7 +15,7 @@ function Navigation() {
             to="/"
             className={s.navItem}
             activeClassName={s.navItemActive}
-            onClick={() => dispatch({ type: "RESET" })}
+            onClick={handleOnNavClick}
             exact
           >
             Newest
@@ -24,7 +26,7 @@ function Navigation() {
             to="/news"
             className={s.navItem}
             activeClassName={s.navItemActive}
-            onClick={() => dispatch({ type: "RESET" })}
+            onClick={handleOnNavClick}
           >
             News
           </NavLink>
