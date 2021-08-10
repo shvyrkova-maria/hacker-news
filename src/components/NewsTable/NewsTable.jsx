@@ -63,13 +63,9 @@ function NewsTable() {
           <InfiniteScroll
             dataLength={state.news.length}
             next={handleIncPageOnScroll}
-            hasMore={true}
+            hasMore={state.news.length < 300 ? true : false}
             loader={<h4>Loading...</h4>}
-            endMessage={
-              <p style={{ textAlign: "center" }}>
-                <b>Yay! You have seen it all</b>
-              </p>
-            }
+            endMessage={<p>Yay! You have seen it all</p>}
             style={{ overflow: "hidden" }}
           >
             {state.news.map(({ id, title, time, domain }) => {
