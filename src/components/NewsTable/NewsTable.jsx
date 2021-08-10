@@ -45,14 +45,21 @@ function NewsTable() {
             dataLength={state.news.length}
             next={() => dispatch({ type: "INCREMENT_PAGE" })}
             hasMore={true}
-            pullDownToRefreshThreshold={300}
             loader={<h4>Loading...</h4>}
+            endMessage={
+              <p style={{ textAlign: "center" }}>
+                <b>Yay! You have seen it all</b>
+              </p>
+            }
             style={{ overflow: "hidden" }}
           >
             {state.news.map(({ id, title, time, domain }) => {
               return (
                 <li key={id}>
-                  <Link to={{ pathname: `/news/${id}` }} className={s.tableRow}>
+                  <Link
+                    to={{ pathname: `/comments/${id}` }}
+                    className={s.tableRow}
+                  >
                     <p className={s.tableRowTime}>{getTimeComponents(time)}</p>
                     <h2 className={s.tableRowTitle}>{title}</h2>
                     <p className={s.tableRowDomain}>{domain}</p>

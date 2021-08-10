@@ -6,29 +6,31 @@ import s from "components/Navigation/Navigation.module.css";
 function Navigation() {
   const { dispatch } = useContext(NewsContext);
   return (
-    <ul className={s.nav}>
-      <li>
-        <NavLink
-          to="/"
-          className={s.navItem}
-          activeClassName={s.navItemActive}
-          onClick={() => dispatch({ type: "RESET" })}
-          exact
-        >
-          Newest
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/news"
-          className={s.navItem}
-          activeClassName={s.navItemActive}
-          onClick={() => dispatch({ type: "RESET" })}
-        >
-          News
-        </NavLink>
-      </li>
-    </ul>
+    <header className={s.navigationWrap}>
+      <ul className={s.nav}>
+        <li>
+          <NavLink
+            to="/"
+            className={s.navItem}
+            activeClassName={s.navItemActive}
+            onClick={() => dispatch({ type: "RESET" })}
+            exact
+          >
+            Newest
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/news"
+            className={s.navItem}
+            activeClassName={s.navItemActive}
+            onClick={() => dispatch({ type: "RESET" })}
+          >
+            News
+          </NavLink>
+        </li>
+      </ul>
+    </header>
   );
 }
 
