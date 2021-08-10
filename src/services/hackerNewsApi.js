@@ -2,13 +2,8 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://api.hnpwa.com/v0";
 
-function fetchNews(page) {
-  const response = axios.get(`/news/${page}.json`);
-  return response;
-}
-
-function fetchNewest(page) {
-  const response = axios.get(`/newest/${page}.json`);
+function fetchNews(feed, page) {
+  const response = axios.get(`/${feed}/${page}.json`);
   return response;
 }
 
@@ -18,4 +13,4 @@ function fetchNewsComments(id) {
   return response;
 }
 
-export { fetchNews, fetchNewest, fetchNewsComments };
+export { fetchNews, fetchNewsComments };

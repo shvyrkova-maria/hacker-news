@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { useRouteMatch } from "react-router";
 import { NewsContext } from "state";
-import { fetchNewest, fetchNews } from "services/hackerNewsApi";
+import { fetchNews } from "services/hackerNewsApi";
 import { Status } from "constants/requestStatus";
 import NewsTable from "components/NewsTable/NewsTable.jsx";
 
@@ -10,23 +10,11 @@ function NewsPage() {
   const { state, dispatch } = useContext(NewsContext);
 
   useEffect(() => {
-    function getNews() {
-      if (url === "/") {
-        fetchNewest(state.page)
-          .then(({ data }) =>
-            dispatch({ type: "NEWS_RESOLVED", payload: data })
-          )
-          .catch((err) => dispatch({ type: "REJECTED", payload: err }));
-      }
-      if (url === "/news") {
-        fetchNews(state.page)
-          .then(({ data }) =>
-            dispatch({ type: "NEWS_RESOLVED", payload: data })
-          )
-          .catch((err) => dispatch({ type: "REJECTED", payload: err }));
-      }
-    }
-    getNews();
+    const currUrl = url === "/" ? "newest" : "news";
+
+    fetchNews(currUrl, state.page)
+      .then(({ data }) => dispatch({ type: "NEWS_RESOLVED", payload: data }))
+      .catch((err) => dispatch({ type: "REJECTED", payload: err }));
   }, [state.page, url]);
 
   return (
