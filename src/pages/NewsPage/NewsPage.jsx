@@ -11,19 +11,19 @@ function NewsPage() {
 
   useEffect(() => {
     function getNews() {
-      try {
-        if (url === "/") {
-          fetchNewest(state.page).then(({ data }) =>
+      if (url === "/") {
+        fetchNewest(state.page)
+          .then(({ data }) =>
             dispatch({ type: "NEWS_RESOLVED", payload: data })
-          );
-        }
-        if (url === "/news") {
-          fetchNews(state.page).then(({ data }) =>
+          )
+          .catch((err) => dispatch({ type: "REJECTED", payload: err }));
+      }
+      if (url === "/news") {
+        fetchNews(state.page)
+          .then(({ data }) =>
             dispatch({ type: "NEWS_RESOLVED", payload: data })
-          );
-        }
-      } catch (err) {
-        dispatch({ type: "REJECTED", payload: err });
+          )
+          .catch((err) => dispatch({ type: "REJECTED", payload: err }));
       }
     }
     getNews();
